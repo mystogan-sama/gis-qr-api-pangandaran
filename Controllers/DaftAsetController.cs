@@ -73,13 +73,13 @@ namespace gisAPI.Controllers
             using var connection = new SqlConnection(_config.GetConnectionString("Default"));
             if (term != null)
             {
-                var kibDLok = await connection.QueryAsync<DaftUnitRepository>("select a.UNITKEY, a.NMUNIT,a.KDLEVEL from DAFTUNIT a WHERE a.KDLEVEL in ('3', '4') and a.NMUNIT LIKE '%" + @term + "%'",
+                var kibDLok = await connection.QueryAsync<DaftUnitRepository>("select a.UNITKEY, a.NMUNIT,a.KDLEVEL from DAFTUNIT a WHERE a.NMUNIT LIKE '%" + @term + "%'",
                     new { term = term });
                 return Ok(kibDLok);
             }
             else
             {
-                var kibDLok = await connection.QueryAsync<DaftUnitRepository>("select a.UNITKEY, a.NMUNIT,a.KDLEVEL from DAFTUNIT a WHERE a.KDLEVEL in ('3', '4') and a.NMUNIT LIKE '%" + @term + "%'",
+                var kibDLok = await connection.QueryAsync<DaftUnitRepository>("select a.UNITKEY, a.NMUNIT,a.KDLEVEL from DAFTUNIT a WHERE a.NMUNIT LIKE '%" + @term + "%'",
                     new { term = term });
                 return Ok(kibDLok);
             }

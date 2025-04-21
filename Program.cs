@@ -8,6 +8,7 @@ using MediatR;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using MicroOrm.Dapper.Repositories.SqlGenerator;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -121,7 +122,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpsRedirection();
 app.UseDefaultFiles();
-
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
+    RequestPath = "" // Root path
+});
 
 app.MapControllers();
 
